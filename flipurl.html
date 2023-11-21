@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Flip Animation</title>
+  <style>
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .column {
+      flex: 1;
+      text-align: center;
+    }
+    .image-container {
+      perspective: 1000px;
+      height: 500px; /* Adjust height as needed */
+    }
+    .image {
+      width: auto;
+      height: 500px;
+      transition: transform 0.5s ease-in-out;
+      transform-style: preserve-3d;
+    }
+    .image img {
+      width: auto;
+      height: 400px;
+      backface-visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="column">
+      <div class="image-container">
+        <div class="image" id="imageContainer">
+          <img src="https://test.dtechcluster.com/wp-content/uploads/2023/11/img1.png" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- <div class="column">
+    </div> -->
+  </div>
+
+  <script>
+    const imageUrls = [
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/img1.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/img2.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/3-1.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/4.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/5-1.png',
+
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/6-1.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/7-1.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/8-1.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/9.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/10.png',
+      'https://test.dtechcluster.com/wp-content/uploads/2023/11/11.png',
+
+    ];
+    let currentImage = 0;
+    const imageContainer = document.getElementById('imageContainer');
+
+    function flipImage() {
+      currentImage = (currentImage + 1) % imageUrls.length;
+      const newImage = document.createElement('img');
+      newImage.src = imageUrls[currentImage];
+      newImage.alt = `Image ${currentImage + 1}`;
+
+      imageContainer.style.transform = 'rotateY(90deg)';
+      setTimeout(() => {
+        imageContainer.innerHTML = '';
+        imageContainer.appendChild(newImage);
+        imageContainer.style.transform = 'rotateY(0deg)';
+      }, 500);
+    }
+
+    setInterval(flipImage, 5000); // Change image every 5 seconds
+  </script>
+</body>
+</html>
